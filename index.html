@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <script>
+     var remote = require('electron').remote;     
+     console.log(remote.getGlobal('sharedObj').prop1);     
+
+     remote.getGlobal('sharedObj').prop1 = 125;     
+
+     var ipcRenderer = require('electron').ipcRenderer;     
+     ipcRenderer.send('show-prop1');
+  </script>
+  <style>
+    body{background-color: #ddd;}
+    .container{display: flex;flex-direction: column;align-items: center;justify-content: center;}
+    #cm{background-color: #eee;color: yellow;font-size: 2em;}
+    h1{color: violet;}
+    button{border:5px solid blue;}
+  </style>
+  </head>
+  <body>    
+    <div class="container">
+      <h1>cOnversOr</h1>
+	     <input type="text" name="pol" id="pol">
+       <div id="cm"></div>
+       <button onclick="coverter()">OK</button> 
+    </div>
+
+    <script type="text/javascript">
+      function coverter() {
+         let pol = document.getElementById("pol").value;
+
+         let cm = document.getElementById("cm");
+
+         cm.innerHTML = pol * 2.54  + " cm";
+      }
+    </script>
+  </body>
+</html>
